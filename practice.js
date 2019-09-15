@@ -1,4 +1,4 @@
-/* 
+/*
   Once you complete a problem, refresh ./SpecRunner.html in your browser and check to see if the problem's test(s) are passing.
   Passed tests will be indicated by a green circle.
   Failed tests will be indicated by a red X.
@@ -27,8 +27,11 @@
   Then invoke the callback function, passing in the first element in the array as it's argument.
 */
 
-// Code Here 
-
+// Code Here
+function first (arr, func){
+  //returns the first item of the arr to the callback
+  return func(arr[0])
+}
 // Do not edit the code below.
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 
@@ -39,16 +42,19 @@ first(names, function(firstName){
 // Do not edit the code above.
 
 
-
 ////////// PROBLEM 2 //////////
 
 /*
-  Write a function called last that takes in an array and a callback function. 
+  Write a function called last that takes in an array and a callback function.
   Then invoke the callback, passing in the last element in the array as the argument.
 */
 
 //Code Here
-
+function last (arr, func){
+  //should multiply the first two parameters and pass the result to the callback
+    //pass the result to the callback means when invoking it put what is asked in the ()
+  return func(arr[arr.length - 1])
+}
 // Do not edit the code below.
 last(names, function(lastName){
   console.log('The last name in names is ' + lastName);
@@ -57,16 +63,17 @@ last(names, function(lastName){
 // Do not edit the code above.
 
 
-
 ////////// PROBLEM 3 //////////
 
 /*
-  Write a function called multiply that takes in three parameters: two numbers and a callback function.  
-  Invoke the callback, passing in the product of the two numbers multiplied as the argument. 
+  Write a function called multiply that takes in three parameters: two numbers and a callback function.
+  Invoke the callback, passing in the product of the two numbers multiplied as the argument.
 */
 
 //Code Here
-
+function multiply (one, two, func){
+  return func(one * two)
+}
 // Do not edit the code below.
 multiply(4, 3, function(answer){
   console.log('The answer is ' + answer); //should console.log 12
@@ -74,21 +81,27 @@ multiply(4, 3, function(answer){
 // Do not edit the code above.
 
 
-
 ////////// PROBLEM 4 //////////
 
 /*
-  Write a function called contains that takes in three parameters: an array, a name and a callback.  
-  Check if the name exists in the array. 
-  If it does, invoke the callback with true as the argument. 
+  Write a function called contains that takes in three parameters: an array, a name and a callback.
+  Check if the name exists in the array.
+  If it does, invoke the callback with true as the argument.
   If the name does not exist, invoke the callback with false as the argument.
 */
 
-//Code Here 
-
+//Code Here
+function contains (arr, names, func){
+  //checks if the name exisits in the arr
+  if (arr.includes(names)){
+    //invokes the callback w t || f
+    return func(true)
+  }
+  return func(false)
+}
 // Do not edit the code below.
 contains(names, 'Colt', function(result){
-  if(result === true){
+  if (result === true){
     console.log('Colt is in the array');
   } else {
     console.log('Colt is not in the array');
@@ -97,8 +110,7 @@ contains(names, 'Colt', function(result){
 // Do not edit the code above.
 
 
-
-////////// PROBLEM 5 //////////
+////////// PROBLEM 5 //////////******
 
 /*
   Write a function called uniq that takes in an array and a callback function.
@@ -106,6 +118,22 @@ contains(names, 'Colt', function(result){
 */
 
 //Code Here
+function uniq (arr, func){
+  let newArr = []
+  //as long as array is bigger than 0
+  while (arr.length > 0){
+    let val
+    val = arr.pop(0)
+    //if the array does not include val
+    if (!arr.includes(val)){
+      //push all them to new arr
+      newArr.push(val)
+    }
+  }
+  //return func invoked w newarr
+  console.log(func(newArr))
+  return func(newArr)
+}
 
 // Do not edit the code below.
 uniq(names, function(uniqArr){
@@ -114,22 +142,32 @@ uniq(names, function(uniqArr){
 // Do not edit the code above.
 
 
+////////// PROBLEM 6 //////////******
 
-////////// PROBLEM 6 //////////
-
-/* 
-  Write a function called each that takes in an array of names and a callback function. 
+/*
+  Write a function called each that takes in an array of names and a callback function.
   For each name in the array, invoke the callback and pass in the name and the name's index as arguments.
 */
 
-//Code Here 
+//Code Here
+function each (arr, func){
+  for (let i = 0; i < arr.length; i++){
+    let curr = arr[i]
+    console.log(func(curr, i))
+    return func(curr, i)
+  }
+}
+// function each (arr, func){
+//   for (let it in arr){
+//    func(arr[it], it)
+//   }
+// }
 
 // Do not edit the code below.
 each(names, function(item, indice){
   console.log('The item in the ' + indice + ' position is ' + item)
 });
 // Do not edit the code above.
-
 
 
 ////////// PROBLEM 7 //////////
@@ -140,7 +178,21 @@ each(names, function(item, indice){
 */
 
 // Code here
+function getUserById (arr, id, func){
+  //for in loops through an obj
+  for (let i in arr ) {
+    //checks if the arr contains the id
+    if (arr[i].id === id){
+      //prints the third object
+      //console.log(arr[i])
+      //prints the third objects id
+      //console.log(arr[i].id)
 
+      //if it does return he invoked cb with the arr obj
+      return func(arr[i])
+    }
+  }
+}
 // Do not edit the code below.
 var users = [
   {
@@ -164,6 +216,6 @@ var users = [
 ];
 
 getUserById(users, '16t', function(user){
-  console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address); 
+  console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address);
 });
 // Do not edit the code above.
